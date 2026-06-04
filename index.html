@@ -167,14 +167,25 @@
   .filter.active{background:var(--navy);color:var(--paper);border-color:var(--navy)}
   .filter .c{opacity:.6;font-weight:500;margin-left:5px}
   .filter.active .c{opacity:.7}
-  .tr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:26px 24px;transition:all .3s ease;display:flex;flex-direction:column;min-height:168px}
-  .card:hover{transform:translateY(-4px);box-shadow:0 18px 40px -22px rgba(12,58,94,.5);border-color:rgba(21,116,179,.4)}
-  .card .ctag{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
-  .card h4{font-family:var(--serif);font-size:21px;font-weight:500;margin:12px 0 6px;line-height:1.15;letter-spacing:-.01em;color:var(--navy)}
-  .card .loc{font-size:13.5px;color:#5c6b78;font-weight:500}
-  .card .meta{margin-top:auto;padding-top:18px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-  .card .spec{font-size:13px;color:#4a5a68;font-weight:600}
+  .tr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .bld-bg{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-opacity='0.32' stroke-width='1.4'%3E%3Cpath d='M3 21h18M5 21V7l7-4 7 4v14M9 21v-5h6v5M9 9h2M13 9h2M9 13h2M13 13h2'/%3E%3C/svg%3E") center/44px no-repeat,linear-gradient(150deg,#0a4aa6 0%,var(--navy) 55%,var(--navy-deep) 100%)}
+  .fcard{background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:all .3s ease}
+  .fcard:hover{transform:translateY(-4px);box-shadow:0 20px 44px -24px rgba(0,42,102,.45);border-color:rgba(0,61,153,.32)}
+  .fmedia{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;border:none;padding:0;margin:0;display:block;text-align:left}
+  .fmedia.clickable{cursor:pointer}
+  .fmedia img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s ease}
+  .fmedia.clickable:hover img{transform:scale(1.05)}
+  .fmedia.noimg img{display:none}
+  .fmedia .zoom{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.85);transition:.3s;z-index:2}
+  .fmedia.clickable:hover .zoom{opacity:1;transform:scale(1)}
+  .fmedia .zoom svg{width:16px;height:16px;color:var(--navy)}
+  .fbody{padding:22px 22px 24px;display:flex;flex-direction:column;flex:1}
+  .fbody .ctag{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
+  .fbody h4{font-family:var(--serif);font-size:21px;font-weight:500;margin:10px 0 5px;line-height:1.15;letter-spacing:-.01em;color:var(--navy)}
+  .fbody .loc{font-size:13.5px;color:#5c6b78;font-weight:500}
+  .fbody .fdesc{font-size:13.5px;color:#4a5a68;line-height:1.55;margin-top:12px}
+  .fbody .meta{margin-top:auto;padding-top:18px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  .fbody .spec{font-size:13px;color:#4a5a68;font-weight:600}
   .badge{font-size:11px;font-weight:700;padding:5px 11px;border-radius:30px;white-space:nowrap}
   .badge.exit{background:var(--navy);color:#fff}
   .badge.dev{background:rgba(42,162,79,.16);color:#1f7d3c}
@@ -223,25 +234,6 @@
   .avatar::after{content:attr(data-i);position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
   .avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;z-index:1}
 
-  /* facilities gallery */
-  .facilities{background:var(--bone)}
-  .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-  .gitem{position:relative;border:none;padding:0;cursor:pointer;border-radius:14px;overflow:hidden;aspect-ratio:4/3;background:linear-gradient(135deg,var(--blue),var(--green));display:block;font-family:inherit}
-  .gitem img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s ease}
-  .gitem:hover img{transform:scale(1.06)}
-  .gitem.noimg img{display:none}
-  .gitem::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(8,42,69,.85) 0%,rgba(8,42,69,.05) 58%);z-index:1}
-  .gcap{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:16px 18px;color:#fff;font-family:var(--serif);font-size:17px;font-weight:500;text-align:left;line-height:1.2}
-  .gitem .zoom{position:absolute;top:12px;right:12px;z-index:2;width:36px;height:36px;border-radius:50%;background:rgba(253,251,246,.94);display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.8);transition:.3s}
-  .gitem:hover .zoom{opacity:1;transform:scale(1)}
-  .gitem .zoom svg{width:17px;height:17px;color:var(--navy)}
-  /* branded placeholder tiles (no photo yet) */
-  .gitem.gph{cursor:default;background:linear-gradient(150deg,#0a4aa6 0%,var(--navy) 52%,var(--navy-deep) 100%)}
-  .gitem.gph .gph-ic{position:absolute;top:46%;left:50%;transform:translate(-50%,-50%);z-index:1;color:rgba(255,255,255,.32)}
-  .gitem.gph .gph-ic svg{width:46px;height:46px}
-  .gitem.gph .gtag{position:absolute;top:13px;left:15px;z-index:2;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.78)}
-  .gitem.gph::after{background:linear-gradient(to top,rgba(8,42,69,.7) 0%,rgba(8,42,69,0) 60%)}
-
   /* lightbox */
   .lb{position:fixed;inset:0;z-index:200;background:rgba(8,28,45,.93);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:48px;opacity:0;transition:opacity .3s ease}
   .lb.open{display:flex}
@@ -264,15 +256,15 @@
     .menu-btn{display:block}
     section{padding:84px 0}
     .hero-stats{grid-template-columns:1fr 1fr;gap:30px 24px;margin-top:54px}
-    .pillars,.svc-grid,.tr-grid,.leads,.bench{grid-template-columns:1fr}
-    .gallery{grid-template-columns:1fr 1fr}
+    .pillars,.svc-grid,.leads,.bench{grid-template-columns:1fr}
+    .tr-grid{grid-template-columns:1fr 1fr}
     .bench{grid-template-columns:1fr 1fr}
     .hero-mtn{opacity:.22}
     .logo img{height:44px}
     .hero-photo{opacity:.30}
     .hero-tint{background:linear-gradient(180deg,rgba(0,61,153,.5) 0%,rgba(0,42,102,.9) 100%)}
   }
-  @media(max-width:560px){.bench{grid-template-columns:1fr}.hero-stats{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.bench,.tr-grid{grid-template-columns:1fr}.hero-stats{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -286,7 +278,6 @@
     <nav class="nav-links" id="navLinks" aria-label="Primary">
       <a href="#platform">Platform</a>
       <a href="#track">Track Record</a>
-      <a href="#facilities">Facilities</a>
       <a href="#team">Leadership</a>
       <a href="#approach">Approach</a>
       <a href="#contact" class="nav-cta">Partner With Us</a>
@@ -378,23 +369,12 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="eyebrow">Track Record</span>
-      <h2>50+ surgical facilities. A team that has done this before.</h2>
-      <p>Surgery centers, surgical hospitals, fertility ASCs, and emergency facilities — developed, acquired, operated, and advised across the country, with multiple positions realized through exits to leading health systems.</p>
+      <h2>50+ facilities. A team that has done this before.</h2>
+      <p>Surgery centers, surgical hospitals, fertility centers, and emergency facilities — developed, acquired, operated, and advised across the country, with multiple positions realized through exits to leading health systems. Select any facility with a photo to view it larger.</p>
     </div>
     <div class="filters reveal" id="filters"></div>
     <div class="tr-grid" id="trGrid"></div>
     <p class="tr-note reveal">Representative engagements across the Candor leadership team. Roles include development, acquisition, full operations, and advisory consulting.</p>
-  </div>
-</section>
-
-<section class="facilities" id="facilities">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="eyebrow">Featured Facilities</span>
-      <h2>The full facility portfolio.</h2>
-      <p>Every surgery center, surgical hospital, fertility ASC, and emergency facility developed, operated, or advised by the Candor team. Facilities with photography on file open to a larger view — imagery for the remainder is being added.</p>
-    </div>
-    <div class="gallery reveal" id="gallery"></div>
   </div>
 </section>
 
@@ -555,8 +535,31 @@ function count(k){return k==="all"?projects.length:k==="exit"?projects.filter(p=
 const filtersEl=document.getElementById('filters');
 cats.forEach((c,i)=>{const b=document.createElement('button');b.className='filter'+(i===0?' active':'');b.dataset.k=c.k;b.innerHTML=c.label+' <span class="c">'+count(c.k)+'</span>';b.onclick=()=>{document.querySelectorAll('.filter').forEach(f=>f.classList.remove('active'));b.classList.add('active');render(c.k);};filtersEl.appendChild(b);});
 const grid=document.getElementById('trGrid');
-function render(k){const list=k==="all"?projects:k==="exit"?projects.filter(p=>p.role==="exit"):projects.filter(p=>p.cat===k);grid.innerHTML='';const tagMap={asc:"Ambulatory Surgery Center",hospital:"Surgical Hospital",fertility:"Fertility / IVF ASC",emergency:"Emergency Center"};list.forEach((p,i)=>{const card=document.createElement('div');card.className='card';card.style.animation=`fade .5s ease ${i*0.025}s both`;card.innerHTML=`<div class="ctag">${tagMap[p.cat]}</div><h4>${p.n}</h4>${p.l?`<div class="loc">${p.l}</div>`:''}<div class="meta"><span class="spec">${p.s}</span><span class="badge ${p.role}">${p.badge}</span></div>`;grid.appendChild(card);});}
-render('all');
+function render(k){
+  const list=k==="all"?projects:k==="exit"?projects.filter(p=>p.role==="exit"):projects.filter(p=>p.cat===k);
+  grid.innerHTML='';
+  const tagMap={asc:"Ambulatory Surgery Center",hospital:"Surgical Hospital",fertility:"Fertility / IVF Center",emergency:"Emergency Center"};
+  const zoomSvg='<span class="zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-3.5-3.5M11 8.5v5M8.5 11h5"/></svg></span>';
+  list.forEach((p,i)=>{
+    const im=imgFor(p.n);
+    const card=document.createElement('article');card.className='fcard';card.style.animation=`fade .5s ease ${i*0.022}s both`;
+    let media;
+    if(im){
+      media=document.createElement('button');media.className='fmedia clickable bld-bg';
+      media.dataset.full=im.full;media.dataset.name=p.n;media.setAttribute('aria-label','Enlarge photo of '+p.n);
+      media.innerHTML=`<img src="${im.thumb}" alt="${p.n}" loading="lazy" onerror="this.closest('.fmedia').classList.add('noimg')">`+zoomSvg;
+      media.onclick=()=>openLb(media);
+    } else {
+      media=document.createElement('div');media.className='fmedia bld-bg';
+    }
+    const body=document.createElement('div');body.className='fbody';
+    body.innerHTML=`<div class="ctag">${tagMap[p.cat]||''}</div><h4>${p.n}</h4>`+
+      `${p.l?`<div class="loc">${p.l}</div>`:''}`+
+      `${p.d?`<p class="fdesc">${p.d}</p>`:''}`+
+      `<div class="meta"><span class="spec">${p.s}</span><span class="badge ${p.role}">${p.badge}</span></div>`;
+    card.appendChild(media);card.appendChild(body);grid.appendChild(card);
+  });
+}
 const style=document.createElement('style');style.textContent='@keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}';document.head.appendChild(style);
 const nav=document.getElementById('nav');addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40));
 const menuBtn=document.getElementById('menuBtn'),navLinks=document.getElementById('navLinks');menuBtn.onclick=()=>navLinks.classList.toggle('open');navLinks.querySelectorAll('a').forEach(a=>a.onclick=()=>navLinks.classList.remove('open'));
@@ -594,27 +597,7 @@ function imgFor(n){
   if(imgMap[n]){ const [t,f]=imgMap[n]; return {thumb:B+t, full:B+f}; }
   return null;
 }
-const buildIcon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-5h6v5M9 9h2M13 9h2M9 13h2M13 13h2"/></svg>';
-const gal=document.getElementById('gallery');
-// photos first (strongest visual lead), then branded tiles — both in category order
-const withImg=projects.filter(p=>imgFor(p.n));
-const without=projects.filter(p=>!imgFor(p.n));
-[...withImg,...without].forEach(p=>{
-  const im=imgFor(p.n);
-  if(im){
-    const b=document.createElement('button');b.className='gitem';
-    b.dataset.full=im.full;b.dataset.name=p.n;
-    b.innerHTML=`<img src="${im.thumb}" alt="${p.n}" loading="lazy" onerror="this.closest('.gitem').classList.add('noimg')">`+
-      `<span class="zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-3.5-3.5M11 8.5v5M8.5 11h5"/></svg></span>`+
-      `<span class="gcap">${p.n}</span>`;
-    b.onclick=()=>openLb(b);
-    gal.appendChild(b);
-  } else {
-    const d=document.createElement('div');d.className='gitem gph';
-    d.innerHTML=`<span class="gtag">${gtag[p.cat]||''}</span><span class="gph-ic">${buildIcon}</span><span class="gcap">${p.n}</span>`;
-    gal.appendChild(d);
-  }
-});
+render('all');
 const lb=document.getElementById('lb'),lbImg=document.getElementById('lbImg'),lbCap=document.getElementById('lbCap');
 function openLb(b){lbImg.src=b.dataset.full;lbImg.alt=b.dataset.name;lbCap.textContent=b.dataset.name;lb.classList.add('open');requestAnimationFrame(()=>lb.classList.add('show'));document.body.style.overflow='hidden';}
 function closeLb(){lb.classList.remove('show');setTimeout(()=>{lb.classList.remove('open');lbImg.src='';},300);document.body.style.overflow='';}
