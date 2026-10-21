@@ -242,6 +242,11 @@
     .nav-links a{color:#fff!important;font-size:17px}
     .nav-cta{border-color:#fff!important;color:#fff!important}
     .menu-btn{display:block}
+    .nav-item{display:block;width:100%}
+    .nav-item::after{display:none}
+    .nav-sub{position:static;opacity:1;visibility:visible;transform:none;background:transparent;border:0;box-shadow:none;padding:8px 0 2px 15px;min-width:0}
+    .nav-sub a{color:#fff!important;opacity:.78;padding:7px 0;font-size:15px}
+    .nav-sub a span{color:rgba(255,255,255,.55)}
     section{padding:84px 0}
     .stats-band{grid-template-columns:1fr 1fr;gap:24px}
     .pillars,.svc-grid,.leads,.bench{grid-template-columns:1fr}
@@ -272,34 +277,73 @@
 </style>
 
 <style>
-  /* ---------- active projects page ---------- */
+  /* ---------- nav: active projects dropdown ---------- */
   .nav-count{display:inline-flex;align-items:center;justify-content:center;min-width:19px;height:19px;padding:0 5px;margin-left:7px;border-radius:999px;background:var(--green);color:#fff;font-size:11px;font-weight:700;line-height:1;vertical-align:middle}
-  header.nav.scrolled .nav-count{background:var(--green)}
-  .hero.short{min-height:auto;padding:160px 0 96px}
-  .hero.short h1{max-width:18ch}
-  .proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:20px}
-  .pcard{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:32px 28px;display:flex;flex-direction:column;transition:all .3s ease}
-  .pcard:hover{transform:translateY(-4px);box-shadow:0 20px 44px -24px rgba(0,42,102,.45);border-color:rgba(0,61,153,.32)}
-  .pcard .ctag{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
-  .pcard h3{font-size:24px;margin:12px 0 6px;color:var(--navy);line-height:1.15}
-  .pcard .loc{font-size:13.5px;color:#5c6b78;font-weight:500}
-  .pcard p{font-size:14.5px;color:#4a5a68;line-height:1.6;margin-top:14px}
-  .pcard .meta{margin-top:auto;padding-top:20px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-  .pcard .spec{font-size:13px;color:#4a5a68;font-weight:600}
-  .pcard .jump{margin-top:16px;font-size:13.5px;font-weight:600;color:var(--blue);display:inline-flex;align-items:center;gap:7px}
-  .pcard .jump:hover{color:var(--navy)}
-  .shots{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:20px}
+  .nav-item{position:relative;display:flex;align-items:center}
+  .nav-item::after{content:"";position:absolute;top:100%;left:-18px;right:-18px;height:20px}
+  .nav-item>a{display:inline-flex;align-items:center}
+  .nav-sub{position:absolute;top:calc(100% + 18px);left:-18px;min-width:272px;background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 26px 52px -30px rgba(0,42,102,.55);padding:8px;opacity:0;visibility:hidden;transform:translateY(7px);transition:opacity .22s ease,transform .22s ease,visibility .22s;z-index:130}
+  .nav-item:hover .nav-sub,.nav-item:focus-within .nav-sub{opacity:1;visibility:visible;transform:translateY(0)}
+  .nav-sub a{display:block;color:var(--ink)!important;opacity:1!important;padding:11px 14px;border-radius:9px;font-size:14px;font-weight:600;line-height:1.25}
+  .nav-sub a:hover{background:var(--bone);color:var(--navy)!important}
+  .nav-sub a span{display:block;font-size:12px;font-weight:500;color:#5c6b78;margin-top:3px}
+
+  /* ---------- active projects page ---------- */
+  [id]{scroll-margin-top:96px}
+  .page-head{position:relative;overflow:hidden;color:var(--paper);padding:132px 0 64px;
+    background:radial-gradient(120% 150% at 80% 8%,#1f63c8 0%,var(--navy) 46%,var(--navy-deep) 100%)}
+  .ph-grid{position:relative;z-index:3;display:grid;grid-template-columns:1fr 560px;gap:56px;align-items:center}
+  .ph-copy h1{font-size:clamp(34px,4.3vw,54px);margin:20px 0 0;max-width:16ch}
+  .ph-copy h1 em{color:var(--green-bright);font-style:normal}
+  .ph-copy p.lede{font-size:17px;max-width:48ch;margin-top:18px;opacity:.9;line-height:1.55}
+  .ph-photo{border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.22);box-shadow:0 30px 60px -30px rgba(0,0,0,.6);line-height:0}
+  .ph-photo img{width:100%;height:auto;display:block}
+  .ph-photo figcaption{background:rgba(255,255,255,.07);padding:11px 16px;font-size:12.5px;line-height:1.4;color:rgba(255,255,255,.8);font-family:var(--sans)}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .chip{display:inline-flex;align-items:baseline;gap:8px;padding:10px 17px;border-radius:40px;border:1px solid rgba(255,255,255,.34);font-size:13.5px;font-weight:600;color:#fff;transition:all .25s ease}
+  .chip:hover{background:rgba(255,255,255,.12);border-color:#fff}
+  .chip b{font-weight:600}
+  .chip em{font-style:normal;opacity:.6;font-size:12px;font-weight:500}
+
+  .spec-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-top:4px}
+  .spec-cell{background:var(--paper);padding:30px 28px}
+  .spec-cell .k{font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
+  .spec-cell .v{font-family:var(--serif);font-size:21px;color:var(--navy);margin-top:10px;line-height:1.25}
+
+  .seq-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:56px 0 20px}
+  .seq-head h3{font-size:26px;color:var(--navy)}
+  .seq-head .note{font-size:13.5px;color:#5c6b78}
+  .shots{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
   .shot{background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
   .shot img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--bone)}
   .shot figcaption{padding:18px 20px 20px}
   .shot .stage{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
   .shot h4{font-family:var(--serif);font-size:19px;font-weight:500;color:var(--navy);margin:8px 0 6px;line-height:1.2}
   .shot p{font-size:13.5px;color:#4a5a68;line-height:1.55}
-  .spec-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-top:20px}
-  .spec-cell{background:var(--paper);padding:32px 28px}
-  .spec-cell .k{font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
-  .spec-cell .v{font-family:var(--serif);font-size:22px;color:var(--navy);margin-top:10px;line-height:1.2}
-  @media(max-width:860px){.proj-grid{grid-template-columns:1fr}.shots{grid-template-columns:1fr}.spec-strip{grid-template-columns:1fr}.hero.short{padding:132px 0 72px}}
+
+  .proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:4px}
+  .pcard{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:34px 30px;display:flex;flex-direction:column;transition:all .3s ease}
+  .pcard:hover{transform:translateY(-4px);box-shadow:0 20px 44px -24px rgba(0,42,102,.45);border-color:rgba(0,61,153,.32)}
+  .pcard .ctag{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
+  .pcard h3{font-size:25px;margin:12px 0 6px;color:var(--navy);line-height:1.15}
+  .pcard .loc{font-size:13.5px;color:#5c6b78;font-weight:500}
+  .pcard p{font-size:14.5px;color:#4a5a68;line-height:1.6;margin-top:14px}
+  .pcard .meta{margin-top:auto;padding-top:22px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  .pcard .spec{font-size:13px;color:#4a5a68;font-weight:600}
+
+  @media(max-width:1080px){.ph-grid{grid-template-columns:1fr 440px;gap:40px}}
+  @media(max-width:860px){
+    .page-head{padding:112px 0 52px}
+    .ph-grid{grid-template-columns:1fr;gap:30px}
+    .ph-photo{max-width:560px}
+    .shots,.proj-grid,.spec-strip{grid-template-columns:1fr}
+    .seq-head{margin:40px 0 18px}
+    .nav-item{display:block;width:100%}
+    .nav-item::after{display:none}
+    .nav-sub{position:static;opacity:1;visibility:visible;transform:none;background:transparent;border:0;box-shadow:none;padding:8px 0 2px 15px;min-width:0}
+    .nav-sub a{color:#fff!important;opacity:.78;padding:7px 0;font-size:15px}
+    .nav-sub a span{color:rgba(255,255,255,.55)}
+  }
 </style>
 </head>
 <body>
@@ -312,7 +356,14 @@
     </a>
     <nav class="nav-links" id="navLinks" aria-label="Primary">
       <a href="index.html#platform">Platform</a>
-      <a href="projects.html">Active Projects<span class="nav-count">3</span></a>
+      <div class="nav-item">
+        <a href="projects.html">Active Projects<span class="nav-count">3</span></a>
+        <div class="nav-sub">
+          <a href="projects.html#palm-springs">Palm Springs Surgical Campus<span>Palm Springs, CA &middot; two ASCs</span></a>
+          <a href="projects.html#carrell-frisco">Carrell Clinic Frisco<span>Frisco, TX &middot; 4 OR &middot; 2 PR</span></a>
+          <a href="projects.html#lancaster">Lancaster Hospital<span>Lancaster, TX &middot; 6 OR &middot; 4 PR</span></a>
+        </div>
+      </div>
       <a href="index.html#track">Track Record</a>
       <a href="index.html#team">Leadership</a>
       <a href="physicians.html">Physician Partnerships</a>
@@ -322,68 +373,46 @@
   </div>
 </header>
 
-<section class="hero short" id="top">
-  <div class="hero-tint" style="background:linear-gradient(120deg,rgba(0,42,102,.55),rgba(0,61,153,.15))"></div>
-  <svg class="hero-grain" aria-hidden="true"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>
+<section class="page-head" id="top">
   <svg class="hero-mtn" viewBox="0 0 1440 320" fill="none" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-    <path d="M0 320 L320 150 L470 235 L720 70 L900 200 L1120 95 L1440 250 L1440 320 Z" fill="#002a66" opacity="0.55"/>
-    <path d="M0 320 L260 205 L520 110 L760 250 L980 150 L1240 240 L1440 175 L1440 320 Z" fill="#001f4d" opacity="0.6"/>
-    <polyline points="720,70 900,200 1120,95 1440,250" stroke="#A18D5D" stroke-width="2" opacity="0.55"/>
-    <polyline points="0,320 320,150 470,235 720,70" stroke="#A8C5E1" stroke-width="1.5" opacity="0.4"/>
+    <path d="M0 320 L320 150 L470 235 L720 70 L900 200 L1120 95 L1440 250 L1440 320 Z" fill="#002a66" opacity="0.5"/>
+    <path d="M0 320 L260 205 L520 110 L760 250 L980 150 L1240 240 L1440 175 L1440 320 Z" fill="#001f4d" opacity="0.55"/>
   </svg>
-  <div class="wrap hero-inner">
-    <span class="eyebrow">Active Projects</span>
-    <h1>Three facilities <em>in development</em>.</h1>
-    <p class="lede">Alongside the completed work in our track record, Candor currently has three surgical facilities in development across California and Texas. The Palm Springs Surgical Campus is under construction now.</p>
-  </div>
-</section>
-
-<section class="track" id="current">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="eyebrow">In development</span>
-      <h2>What we have under way.</h2>
-      <p>Each of these is a ground-up surgical facility Candor is developing or overseeing through construction, licensure, and opening.</p>
+  <div class="wrap ph-grid">
+    <div class="ph-copy">
+      <span class="eyebrow">Active Projects</span>
+      <h1>Three facilities <em>in development</em>.</h1>
+      <p class="lede">Alongside the completed work in our track record, Candor has three surgical facilities in development across California and Texas. Ground is broken in Palm Springs.</p>
+      <div class="chips">
+        <a class="chip" href="#palm-springs"><b>Palm Springs Surgical Campus</b> <em>CA</em></a>
+        <a class="chip" href="#carrell-frisco"><b>Carrell Clinic Frisco</b> <em>TX</em></a>
+        <a class="chip" href="#lancaster"><b>Lancaster Hospital</b> <em>TX</em></a>
+      </div>
     </div>
-    <div class="proj-grid">
-      <article class="pcard reveal">
-        <span class="ctag">Under construction</span>
-        <h3>Palm Springs Surgical Campus</h3>
-        <div class="loc">Palm Springs, California</div>
-        <p>A 10,000 sq ft, three-OR ASC with cardiac cath lab, plus a one-OR / one-procedure-room ASC — both to be Medicare- and AAAHC-certified. Candor is overseeing development.</p>
-        <a class="jump" href="#palm-springs">See the site &rarr;</a>
-        <div class="meta"><span class="spec">Two ASCs &middot; 3 OR + cath lab</span><span class="badge wip">In Development</span></div>
-      </article>
-      <article class="pcard reveal">
-        <span class="ctag">In development</span>
-        <h3>Carrell Clinic Frisco</h3>
-        <div class="loc">Frisco, Texas</div>
-        <p>An orthopedic surgery center for the Carrell Clinic, carrying four operating rooms and two procedure rooms.</p>
-        <div class="meta"><span class="spec">4 OR &middot; 2 PR</span><span class="badge wip">In Development</span></div>
-      </article>
-      <article class="pcard reveal">
-        <span class="ctag">In development</span>
-        <h3>Lancaster Hospital</h3>
-        <div class="loc">Lancaster, Texas</div>
-        <p>A surgical hospital with six operating rooms and four procedure rooms.</p>
-        <div class="meta"><span class="spec">6 OR &middot; 4 PR</span><span class="badge wip">In Development</span></div>
-      </article>
-    </div>
+    <figure class="ph-photo">
+      <img src="projects/palm-springs-03-footings.jpg" alt="Formed foundation footings across the Palm Springs Surgical Campus site" width="600" height="450">
+      <figcaption>Palm Springs Surgical Campus &mdash; foundations under way</figcaption>
+    </figure>
   </div>
 </section>
 
 <section class="approach" id="palm-springs">
   <div class="wrap">
-    <div class="sec-head reveal">
+    <div class="sec-head reveal" style="margin-bottom:40px">
       <span class="eyebrow">Palm Springs, California</span>
-      <h2>The Palm Springs Surgical Campus, <span class="serif-italic">on the ground</span>.</h2>
-      <p>Two ambulatory surgery centers on a single campus. Ground has been broken, the pads are excavated, footings are formed, and site concrete is going in.</p>
+      <h2>Palm Springs Surgical Campus</h2>
+      <p>Two ambulatory surgery centers on a single campus, with Candor overseeing development. Ground has been broken, the pads are excavated, footings are formed, and site concrete is going in.</p>
     </div>
 
     <div class="spec-strip reveal">
       <div class="spec-cell"><div class="k">Primary ASC</div><div class="v">10,000 sq ft &middot; three ORs &middot; cardiac cath lab</div></div>
       <div class="spec-cell"><div class="k">Second ASC</div><div class="v">One OR &middot; one procedure room</div></div>
       <div class="spec-cell"><div class="k">Certification</div><div class="v">Medicare and AAAHC</div></div>
+    </div>
+
+    <div class="seq-head reveal">
+      <h3>On the ground</h3>
+      <span class="note">Photographs from the site, in build order.</span>
     </div>
 
     <div class="shots">
@@ -419,6 +448,31 @@
           <p>Crews placing and finishing curb and flatwork along the site frontage.</p>
         </figcaption>
       </figure>
+    </div>
+  </div>
+</section>
+
+<section class="track">
+  <div class="wrap">
+    <div class="sec-head reveal" style="margin-bottom:40px">
+      <span class="eyebrow">Also in development</span>
+      <h2>Two more under way in Texas.</h2>
+    </div>
+    <div class="proj-grid">
+      <article class="pcard" id="carrell-frisco">
+        <span class="ctag">In development</span>
+        <h3>Carrell Clinic Frisco</h3>
+        <div class="loc">Frisco, Texas</div>
+        <p>An orthopedic surgery center for the Carrell Clinic, carrying four operating rooms and two procedure rooms.</p>
+        <div class="meta"><span class="spec">4 OR &middot; 2 PR</span><span class="badge wip">In Development</span></div>
+      </article>
+      <article class="pcard" id="lancaster">
+        <span class="ctag">In development</span>
+        <h3>Lancaster Hospital</h3>
+        <div class="loc">Lancaster, Texas</div>
+        <p>A surgical hospital with six operating rooms and four procedure rooms.</p>
+        <div class="meta"><span class="spec">6 OR &middot; 4 PR</span><span class="badge wip">In Development</span></div>
+      </article>
     </div>
   </div>
 </section>
